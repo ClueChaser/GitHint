@@ -16,12 +16,13 @@ rmdir dir
 
 	
 git log -- commits history
+git log --oneline -- shortened log
 git init 
 git add file.txt -- prepare for commit
 git commit -m "comment" -- make a commit
 git status
 ```
-	
+---
 ## SSH
 
 ```	
@@ -38,8 +39,36 @@ git remote add (repository name) (SSH URL)
 git remote -v -- check the connection [-v == --verbose]
 git push -u (repository name) (current local branch name) [-u is needed only once to establish 	connection]
 ```
+---
+```
+HEAD is a link to the very last commit hash
+.git/HEAD
+
+HEAD contains ref to .git/refs/heads/master --> hash
+
+git add file --> untracked file to staging area = index, cache 
+All the files that is not untracked automaticaly tracked (+ staged, modified if it is)
+```
+
+# Comments
+ 
+```
+git commit -m "LGS-239: ..." -- LGS-239, 239-th task in LGS project
+
+Conventional comments:
+<type>: <message>
+feat - feature (new function)
+fix (fix for errors)
+```
+[More about style](https://www.conventionalcommits.org/ru/v1.0.0-beta.4/#спецификация)
+
+`GitHub comment: git commit -m "Исправить #344, ..."`
+
+Для коммитов на русском реккомендуется использовать инфинитив (*Исправить..., Добавить...*)
+На английском -- повелительное наклонение (*Use..., Fix...*)
+---
 	
-MARKDOWN
+#MARKDOWN
 	
 # I
 ## Don't
