@@ -6,21 +6,75 @@ cd .. -- back to parent
 	
 command_1 && command_2 -- simultaniously do two commands
 touch file.txt file_2.txt ... -- create file
-mkdir dir 
+mkdir <dir>  
 
 	
-rm file.txt
-rm -r dir (remove dir and all its files)
+rm <file>
+rm -r <dir> (remove dir and all its files)
 rm -rf (repository) (f -- force)
-rmdir dir 
+rmdir <dir> 
 
 	
 git log -- commits history
 git log --oneline -- shortened log
 git init 
-git add file.txt -- prepare for commit
+git add <file> -- prepare for commit
 git commit -m "comment" -- make a commit
+git commit --amend -- change the HEAD (last) commit (open vim/nano)
+git commit --amend -m "Message" -- change commit message
+git commit --amend --no-edit -- change commit, message stays
 git status
+
+
+To restore added to staged file, use
+git restore --staged <file>
+git restore --staged -- from staged to untracked/modified whole dir
+To restore modified file you use
+git restore <file>
+After that your file will be the last previous staged or commited version of it
+To cancel certain commit use
+git reset --hard <commit hash> -- hash of commit that you want to be the last
+All files in directory are now is up to the last commit
+
+
+git diff <hash_1> <hash_2> -- see the difference between commits, form 1 to 2
+In output @@ num_1, num_2 @@ -- num_2 strings to compare strarting from string num_1  
+- -- original file
++ -- modified
+git diff -- see the changes in the modified files
+git diff --staged -- see the changes in the staged files
+
+echo "text" -- print "text" to output
+echo "text" >> file.txt -- ADD "text" to the last line of file
+            > file.txt -- RESET file and write "text"
+
+
+.gitignore -- file, that helps git to ignore some untracked files
+One name of file per line
+# -- comments
+*.jpeg -- all .jpeg type files
+!doge.jpeg -- except doge.jpeg file
+docs/*/tmp all tmp files in subfolders of docs (docs/first/tmp) 
+docs/**/tmp all tmp files in all subfolders of docs (docs/first/second/.../tmp)
+* all files
+file?.txt -- all txt files that match file(symbol)
+file[0-2].txt or file[012] -- all txt files that match file(symbol from 0 to 2) (exmp: file1.txt)
+/todo.txt -- ignore todo.txt in root folder
+spam.txt -- ignore spam.txt in all folders
+build/ -- ignore build folder
+git status --ignored -- status of ignored files too
+
+EXAMPLE:
+# ignore all files in build folder
+build/
+
+# ignore all .log files
+*.log
+
+# don not ignore *.log files in examples
+# because it is example for documentation
+!examples/**/*.log
+
 ```
 ---
 ## SSH
@@ -67,6 +121,13 @@ fix (fix for errors)
 ```
 Для коммитов на русском реккомендуется использовать инфинитив (*Исправить..., Добавить...*)
 На английском -- повелительное наклонение (*Use..., Fix...*)
+```
+
+```
+^X, ^G, ... -- ^ means CTRL
+
+To exit from VIM, press Esc, type :qa!, press Enter
+To see vim-book, type vimtutor (or vimtutor ru)
 ```
 ---
 	
