@@ -20,7 +20,9 @@ command_1 && command_2 # simultaniously do two commands<br>
 
 
 `git log` # commits history<br>
-`git log --oneline` # shortened log<br>
+`git log --oneline` # shortened log of current branch<br>
+`git log --decorate` <br>
+`git log --oneline <branch_1> <branch_2> ...` # shortened log of multiple branches<br>
 `git init` <br>
 `git add <file>` # prepare for commit<br>
 `git commit` # commit throu opening text redactor<br>
@@ -98,15 +100,16 @@ One name of file per line<br>
 Ключи хранятся в репозитории `.ssh/`<br>
 `ls -la .ssh/`<br>
 Генерация ключей <br>
-`sh-keygen -t ed25519 -C "электронная почта, к которой привязан ваш аккаунт на GitHub"` <br>
+`ssh-keygen -t ed25519 -C "электронная почта, к которой привязан ваш аккаунт на GitHub"` <br>
 или<br>
 `ssh-keygen -t rsa -b 4096 -C "электронная почта, к которой привязан ваш аккаунт на GitHub"` <br>
+`ssh-keygen -t rsa -f ~/.ssh/accountB -C <email2@example.com>`
 Проверить правильность ключа SSH<br>
 `ssh -T git@github.com` <br>
 	
 `git remote add (repository name or origin) (SSH URL)` # concect to remote repository to push in<br>
 `git remote rm (repository name)` # delete connection<br>
-`git push -u (repository name) (current local branch name)` # [-u is needed only once to establish 	connection<br>
+`git push -u (--set-upstream) (repository name) (current local branch name)` # [-u is needed only once to establish connection<br>
 `git remote -v` # check the connection (-v == --verbose)<br>
 `git clone` # clone and connect to remote repository<br>
 after clone you don not need to use "push -u", because the connection is already exit<br>
@@ -141,8 +144,10 @@ behind the main.<br>
 `*main`  <br>
 `git merge feature` # feature will be merged to main, main and feature now at the same nod
 and all commits from feature now on the main branch<br>
-
-OUTPUT:<br>
+Simple git merge just combine two branches in one! That is called FF (Fast-Forward, linear mode)<br>
+`git merge --no-edit --no-ff "branch"` # отключить ввод сообщения и fast-forward<br>
+Now, we have not a one main branch with side branch all in one line, but two branches that have same HEAD-nod.<br>
+_OUTPUT_:<br>
 `Updating hash_1 hash_2` # all commits from 1 to 2 have been merged<br>
 `fast-forward` # mode of merging, it means that after merging linear history of commits appears (one line, branch of commits)<br>
 
@@ -158,6 +163,10 @@ Algorithm before pushing your work to remote rep:<br>
 `git merge main` # влили main в новую ветку my-branch<br>
 `git push -u origin my-branch` # отправили ветку my-branch в удалённый репозиторий<br>
 
+`git push --force` # удалить все коммиты на удаленном от текущего локального и запушить коммиты с локального _USE CAREFULLY_<br>
+
+`git congif [--global] merge.ff false` # disable ff always<br>
+Usually, there is no need to create a new comment for merge request. <br>
 ---
 
 `HEAD` is a link to the very last commit hash<br>
@@ -167,6 +176,45 @@ Algorithm before pushing your work to remote rep:<br>
 
 `git add file` --> untracked file to `staging area` = `index`, `cache` <br>
 All the files that is not untracked automaticaly tracked (+ staged, modified if it is)<br>
+
+### Подходы к брэнчингу
+* `Feature branch workflow` — 1. New function -- new branch, 2. Merge ready branch code to main 3. main is always stable
+* `Git flow` — более сложный вариант. Подход похож на feature branch workflow, но в нём создаётся больше веток, а изменения (коммиты) делят на разные типы: исправление, новая функциональность и так далее. Разные типы коммитов попадают в разные ветки.
+* `Trunk-based` — same as feature branch workflow, but do merge often (every day)
+
+### Conflicts 
+
+
+The first line of `file.txt`:<br>
+main --> `main`<br>
+br1 --> `version_1`<br>
+br2 --> `version_2`<br>
+
+```
+       ___br2_______
+      /
+---------(main, br1)---
+```
+
+In (main, br1) `file.txt`, that was modified by br1.<br>
+In br2 the same `file.txt`, that was simultaniously modified with br1.<br>
+By merging br2 in the main we create a conflict.<br>
+After merging successfully abort, there is new comments in `file.txt` in main branch will appear:<br>
+```
+$ cat file.txt  
+
+<<<<<<< HEAD
+version 1
+=======
+version 2
+>>>>>>> br2 
+```
+Here only conflicts are shown.<br>
+Text between <<<<<<< HEAD and ======= points on changes that are in HEAD (main).<br>
+Text between ======= and >>>>>>> br2 points on changes that are in br2.<br>
+
+You should open the file.txt and delete all what you don not need, then re-add and re-commit.<br>
+Git refers to comments (markers of conflict) in `file.txt` to understand if the conflict still present.<br>
 
 
 # Comments
@@ -208,14 +256,14 @@ To see vim-book, type vimtutor (or vimtutor ru)
 ##### Set
 ###### My git on fire
 
-`--- is line`
+--- is line
 
-'<br>' или два пробела -- перенос строки
+<br> или два пробела -- перенос строки
 два раза энтер -- параграф
 
-`*курсив* или _курсив_`
-`**полужирный текст** или __полужирный текст__`
-`~~зачеркнутый текст~~`
+*курсив* или _курсив_
+**полужирный текст** или __полужирный текст__
+~~зачеркнутый текст~~
 
 1. Нумерованный список
 * Ненумерованный список
@@ -228,8 +276,8 @@ To see vim-book, type vimtutor (or vimtutor ru)
 # Additional
  
  
-`aweasome lists -- curious links`
+`Aweasome lists` # curious links<br>
 [remote job](https://github.com/lukasz-madon/awesome-remote-job#readme) <br>
-[fonts](https://github.com/brabadu/awesome-fonts#readme)
+[fonts](https://github.com/brabadu/awesome-fonts#readme)<br>
 
 
