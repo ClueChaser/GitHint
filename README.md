@@ -124,7 +124,7 @@ fork, change, send change request <br>
 `git branch -a` # see the branches<br>
 `git branch "name"` # create a new branch<br>
 name usually feature/problem or bugfix/problem<br>
-`git checkout "branch name" # do "name" branch the current branch<br>
+`git checkout "branch name"` # do "name" branch the current branch<br>
 `git checkout -b "name"` # create and move to new branch<br>
 `git checkout "name"` # after cloning, you should make a local copies of branch<br>
 `git diff branch_1 branch_2` (or use hash)<br>
@@ -135,16 +135,16 @@ If there are no new commits from new branch, HEAD of the new branch is where it 
 
 Now, there are two branches, main and bugfix with one HEAD, if you commit main, bugfix HEAD will be 
 behind the main.<br>
-commit~0 -- current commit, commit~1 or commit~ -- previous, ~2, ~3, ~N<br>
-(HEAD, hash, branch)~<br>
+`commit~0` # current commit, `commit~1` or `commit~` # previous, `~2`, `~3`, `~N`<br>
+`(HEAD, hash, branch)~`<br>
 
 `*main`  <br>
-`git merge feature` --> feature will be merged to main, main and feature now at the same nod
+`git merge feature` # feature will be merged to main, main and feature now at the same nod
 and all commits from feature now on the main branch<br>
 
 OUTPUT:<br>
-Updating hash_1 hash_2 -- all commits from 1 to 2 have been merged<br>
-fast-forward -- mode of merging, it means that after merging linear history of commits appears (one line, branch of commits)<br>
+`Updating hash_1 hash_2` # all commits from 1 to 2 have been merged<br>
+`fast-forward` # mode of merging, it means that after merging linear history of commits appears (one line, branch of commits)<br>
 
 There are conflicts appear, when two or more people change the same file.<br>
 [documentation](https://git-scm.com/book/ru/v2/Инструменты-Git-Продвинутое-слияние)<br>
