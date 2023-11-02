@@ -167,6 +167,7 @@ Algorithm before pushing your work to remote rep:<br>
 
 `git congif [--global] merge.ff false` # disable ff always<br>
 Usually, there is no need to create a new comment for merge request. <br>
+
 ---
 
 `HEAD` is a link to the very last commit hash<br>
@@ -199,17 +200,9 @@ br2 --> `version_2`<br>
 In (main, br1) `file.txt`, that was modified by br1.<br>
 In br2 the same `file.txt`, that was simultaniously modified with br1.<br>
 By merging br2 in the main we create a conflict.<br>
-After merging successfully abort, there is new comments in `file.txt` in main branch will appear:<br>
-```
-$ cat file.txt  
+After merging successfully abort, there is new comments in `file.txt` in main branch will appear.<br>
 
-<<<<<<< HEAD
-version 1
-=======
-version 2
->>>>>>> br2 
-```
-Here only conflicts are shown.<br>
+There, in the comments, only conflicts are shown.<br>
 Text between <<<<<<< HEAD and ======= points on changes that are in HEAD (main).<br>
 Text between ======= and >>>>>>> br2 points on changes that are in br2.<br>
 
@@ -242,6 +235,7 @@ fix (fix for errors)<br>
 To exit from VIM, press Esc, type :qa!, press Enter
 To see vim-book, type vimtutor (or vimtutor ru)
 ```
+
 ---
 
 	
