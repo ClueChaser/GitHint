@@ -1,167 +1,235 @@
-```
-pwd -- current working directory
-ls -al
-cd .. -- back to parent
-	
-	
-command_1 && command_2 -- simultaniously do two commands
-touch file.txt file_2.txt ... -- create file
-mkdir <dir>  
+## Bash
+
+
+`pwd` # current working directory<br>
+`ls -al`<br>
+`cd ..` # back to parent<br>
+		
+command_1 && command_2 # simultaniously do two commands<br>
+`touch file.txt file_2.txt ...` # create file<br>
+`mkdir <dir>`  <br>
 
 	
-rm <file>
-rm -r <dir> (remove dir and all its files)
-rm -rf (repository) (f -- force)
-rmdir <dir> 
-
-	
-git log -- commits history
-git log --oneline -- shortened log
-git init 
-git add <file> -- prepare for commit
-git commit -m "comment" -- make a commit
-git commit --amend -- change the HEAD (last) commit (open vim/nano)
-git commit --amend -m "Message" -- change commit message
-git commit --amend --no-edit -- change commit, message stays
-git status
+`rm <file>`<br>
+`rm -r <dir>` # (remove dir and all its files)<br>
+`rm -rf (repository)` # (f -- force)<br>
+`rmdir <dir>` <br>
 
 
-To restore added to staged file, use
-git restore --staged <file>
-git restore --staged -- from staged to untracked/modified whole dir
-To restore modified file you use
-git restore <file>
-After that your file will be the last previous staged or commited version of it
-To cancel certain commit use
-git reset --hard <commit hash> -- hash of commit that you want to be the last
-All files in directory are now is up to the last commit
+## Commits
 
 
-git diff <hash_1> <hash_2> -- see the difference between commits, form 1 to 2
-In output @@ num_1, num_2 @@ -- num_2 strings to compare strarting from string num_1  
-- -- original file
-+ -- modified
-git diff -- see the changes in the modified files
-git diff --staged -- see the changes in the staged files
+`git log` # commits history<br>
+`git log --oneline` # shortened log<br>
+`git init` <br>
+`git add <file>` # prepare for commit<br>
+`git commit` # commit throu opening text redactor<br>
+`git commit -m "comment"` # make a commit<br>
+`git commit --amend` # change the HEAD (last) commit (open vim/nano)<br>
+`git commit --amend -m "Message"` # change commit message<br>
+`git commit --amend --no-edit` # change commit, message stays<br>
+`git status`<br>
 
-echo "text" -- print "text" to output
-echo "text" >> file.txt -- ADD "text" to the last line of file
-            > file.txt -- RESET file and write "text"
+
+## Canceling
 
 
-.gitignore -- file, that helps git to ignore some untracked files
-One name of file per line
-# -- comments
-*.jpeg -- all .jpeg type files
-!doge.jpeg -- except doge.jpeg file
-docs/*/tmp all tmp files in subfolders of docs (docs/first/tmp) 
-docs/**/tmp all tmp files in all subfolders of docs (docs/first/second/.../tmp)
-* all files
-file?.txt -- all txt files that match file(symbol)
-file[0-2].txt or file[012] -- all txt files that match file(symbol from 0 to 2) (exmp: file1.txt)
-/todo.txt -- ignore todo.txt in root folder
-spam.txt -- ignore spam.txt in all folders
-build/ -- ignore build folder
-git status --ignored -- status of ignored files too
+To restore added to staged file, use<br>
+`git restore --staged <file>`<br>
+`git restore --staged` # from staged to untracked/modified whole dir<br>
+To restore modified file you use<br>
+`git restore <file>`<br>
+After that your file will be the last previous staged or commited version of it<br>
+To cancel certain commit use<br>
+`git reset --hard <commit hash>` # hash of commit that you want to be the last<br>
+All files in directory are now is up to the last commit<br>
 
-EXAMPLE:
-# ignore all files in build folder
-build/
 
-# ignore all .log files
-*.log
+## git diff
 
-# don not ignore *.log files in examples
-# because it is example for documentation
-!examples/**/*.log
 
-```
+`git diff <hash_1> <hash_2>` # see the difference between commits, form 1 to 2<br>
+In output `@@ num_1, num_2 @@` num_2 strings to compare strarting from string num_1<br>  
+`-` # original file<br>
+`+` # modified<br>
+`git diff` # see the changes in the modified files<br>
+`git diff --staged` # see the changes in the staged files<br>
+
+`echo "text" # print "text"` # to output<br>
+`echo "text" >> file` # ADD "text" to the last line of file<br>
+            `> file` # RESET file and write "text"<br>
+
+
+## .gitignore
+
+
+`.gitignore` # file, that helps git to ignore some untracked files<br>
+One name of file per line<br>
+`#` # comments<br>
+`*.jpeg` # all .jpeg type files<br>
+`!doge.jpeg` # except doge.jpeg file<br>
+`docs/*/tmp` all tmp files in subfolders of docs (docs/first/tmp) <br>
+`docs/**/tmp` all tmp files in all subfolders of docs (docs/first/second/.../tmp)<br>
+`*` all files<br>
+`file?.txt` # all txt files that match file(symbol)<br>
+`file[0-2].txt` or `file[012]` # all txt files that match file(symbol from 0 to 2) (exmp: file1.txt)<br>
+`/todo.txt` # ignore todo.txt in root folder<br>
+`spam.txt` # ignore spam.txt in all folders<br>
+`build/` # ignore build folder<br>
+`git status --ignored` # status of ignored files too<br>
+
+
+### EXAMPLE:
+
+ 
+`build/` # ignore all files in build folder<br>
+
+`*.log` # ignore all .log files<br>
+
+`!examples/**/*.log` # don not ignore *.log files in examples, because it is example for documentation<br>
+
+
 ---
+
+
 ## SSH
 
-```	
-Ключи хранятся в репозитории .ssh/
-ls -la .ssh/
-Генерация ключей 
-sh-keygen -t ed25519 -C "электронная почта, к которой привязан ваш аккаунт на GitHub" 
-или
-ssh-keygen -t rsa -b 4096 -C "электронная почта, к которой привязан ваш аккаунт на GitHub" 
-Проверить правильность ключа SSH
-ssh -T git@github.com 
 	
-git remote add (repository name) (SSH URL)
-git remote -v -- check the connection [-v == --verbose]
-git push -u (repository name) (current local branch name) [-u is needed only once to establish 	connection]
-```
+Ключи хранятся в репозитории `.ssh/`<br>
+`ls -la .ssh/`<br>
+Генерация ключей <br>
+`sh-keygen -t ed25519 -C "электронная почта, к которой привязан ваш аккаунт на GitHub"` <br>
+или<br>
+`ssh-keygen -t rsa -b 4096 -C "электронная почта, к которой привязан ваш аккаунт на GitHub"` <br>
+Проверить правильность ключа SSH<br>
+`ssh -T git@github.com` <br>
+	
+`git remote add (repository name or origin) (SSH URL)` # concect to remote repository to push in<br>
+`git remote rm (repository name)` # delete connection<br>
+`git push -u (repository name) (current local branch name)` # [-u is needed only once to establish 	connection<br>
+`git remote -v` # check the connection (-v == --verbose)<br>
+`git clone` # clone and connect to remote repository<br>
+after clone you don not need to use "push -u", because the connection is already exit<br>
+fork repository is needed if you don not have rights to change the main project,
+fork, change, send change request <br>
+
+
+## Branching
+
+
+`hash (HEAD --> branch_1, branch_2)` two tags on this commit and HEAD on branch_1<br>
+`hash (branch_3)` # tag of branch_3 is on this commit<br>
+`hash` # commit without tag<br>
+
+`git branch -a` # see the branches<br>
+`git branch "name"` # create a new branch<br>
+name usually feature/problem or bugfix/problem<br>
+`git checkout "branch name" # do "name" branch the current branch<br>
+`git checkout -b "name"` # create and move to new branch<br>
+`git checkout "name"` # after cloning, you should make a local copies of branch<br>
+`git diff branch_1 branch_2` (or use hash)<br>
+`git branch -D "name"` # delete branch<br>
+`git branch -d "name"` # delete branch only when it was merged with another<br>
+
+If there are no new commits from new branch, HEAD of the new branch is where it is created<br>
+
+Now, there are two branches, main and bugfix with one HEAD, if you commit main, bugfix HEAD will be 
+behind the main.<br>
+commit~0 -- current commit, commit~1 or commit~ -- previous, ~2, ~3, ~N<br>
+(HEAD, hash, branch)~<br>
+
+`*main`  <br>
+`git merge feature` --> feature will be merged to main, main and feature now at the same nod
+and all commits from feature now on the main branch<br>
+
+OUTPUT:<br>
+Updating hash_1 hash_2 -- all commits from 1 to 2 have been merged<br>
+fast-forward -- mode of merging, it means that after merging linear history of commits appears (one line, branch of commits)<br>
+
+There are conflicts appear, when two or more people change the same file.<br>
+[documentation](https://git-scm.com/book/ru/v2/Инструменты-Git-Продвинутое-слияние)<br>
+
+After pushing new branch to remote repository, you can create a **pull request** to merge one branch to another from GitHub interface. <br>
+
+Algorithm before pushing your work to remote rep:<br>
+`git checkout main` # перешли в main<br>
+`git pull` подтянули новые изменения в main<br>
+`git checkout my-branch` # вернулись в рабочую ветку my-branch<br>
+`git merge main` # влили main в новую ветку my-branch<br>
+`git push -u origin my-branch` # отправили ветку my-branch в удалённый репозиторий<br>
+
 ---
-```
-HEAD is a link to the very last commit hash
-.git/HEAD
 
-HEAD contains ref to .git/refs/heads/master --> hash
+`HEAD` is a link to the very last commit hash<br>
+`.git/HEAD`<br>
 
-git add file --> untracked file to staging area = index, cache 
-All the files that is not untracked automaticaly tracked (+ staged, modified if it is)
-```
+`HEAD` contains ref to `.git/refs/heads/master` --> `hash`<br>
+
+`git add file` --> untracked file to `staging area` = `index`, `cache` <br>
+All the files that is not untracked automaticaly tracked (+ staged, modified if it is)<br>
+
 
 # Comments
+
  
-```
-git commit -m "LGS-239: ..." -- LGS-239, 239-th task in LGS project
+`git commit -m "LGS-239: ..."` # LGS-239, 239-th task in LGS project<br>
 
-Conventional comments:
-<type>: <message>
-feat - feature (new function)
-fix (fix for errors)
-```
-[More about style](https://www.conventionalcommits.org/ru/v1.0.0-beta.4/#спецификация)
+Conventional comments:<br>
+`<type>: <message>`
+feat - feature (new function)<br>
+fix (fix for errors)<br>
 
-`GitHub comment: git commit -m "Исправить #344, ..."`
+[More about style](https://www.conventionalcommits.org/ru/v1.0.0-beta.4/#спецификация)<br>
+
+`GitHub comment: git commit -m "Исправить #344, ..."`<br>
+
+Для коммитов на русском реккомендуется использовать инфинитив (*Исправить..., Добавить...*)<br>
+На английском -- повелительное наклонение (*Use..., Fix...*)<br>
+
+
+
+`^X, ^G, ... -- ^ means CTRL`
 
 ```
-Для коммитов на русском реккомендуется использовать инфинитив (*Исправить..., Добавить...*)
-На английском -- повелительное наклонение (*Use..., Fix...*)
-```
-
-```
-^X, ^G, ... -- ^ means CTRL
-
 To exit from VIM, press Esc, type :qa!, press Enter
 To see vim-book, type vimtutor (or vimtutor ru)
 ```
 ---
+
 	
-#MARKDOWN
-	
+# MARKDOWN
+
+
+```	
 # I
 ## Don't
 ### Want
 #### To
 ##### Set
-*###### My git on fire*
-
+###### My git on fire
 
 `--- is line`
 
-
-
-```
 '<br>' или два пробела -- перенос строки
 два раза энтер -- параграф
-```
+
 `*курсив* или _курсив_`
 `**полужирный текст** или __полужирный текст__`
 `~~зачеркнутый текст~~`
 
-```
 1. Нумерованный список
 * Ненумерованный список
 - Ненумерованный список
-```
 
-```
 [Яндекс](https://www.yandex.ru) ссылка как часть текста
 [Яндекс](https://www.yandex.ru "Title")
 ```
+
+# Additional
+ 
+ 
+`aweasome lists -- curious links`
+[remote job](https://github.com/lukasz-madon/awesome-remote-job#readme) <br>
+[fonts](https://github.com/brabadu/awesome-fonts#readme)
 
 
